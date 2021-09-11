@@ -65,4 +65,24 @@ trailing-location    ::= (`loc` `(` location `)`)?
 | $res:2      | 第一列     | 第二列     |
 | ---------- | :-----------:  | :-----------: |
 | 第一行     | 第一列     | 第二列     |
+
+# Blocks
+list of operations. In SSACFG regions , each block represents a compiler basic block where instructions inside the block are executed in order and terminator operations implement control flow branches between basic blocks.
+```
+block           ::= block-label operation+
+block-label     ::= block-id block-arg-list? `:`
+block-id        ::= caret-id
+caret-id        ::= `^` suffix-id
+value-id-and-type ::= value-id `:` type
+
+// Non-empty list of names and types.
+value-id-and-type-list ::= value-id-and-type (`,` value-id-and-type)*
+
+block-arg-list ::= `(` value-id-and-type-list? `)`
+```
+The “block argument” representation eliminates a number of special cases from the IR compared to traditional “PHI nodes are operations” SSA IRs (like LLVM). For example, the parallel copy semantics of SSA is immediately apparent, and function arguments are no longer a special case: they become arguments to the entry block [ more rationale ]. Blocks are also a fundamental concept that cannot be represented by operations because values defined in an operation cannot be accessed outside the operation.
 # Region
+A region is an ordered list of MLIR Blocks .
+```
+region ::= `{` block* `}`
+```
