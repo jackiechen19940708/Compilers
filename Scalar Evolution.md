@@ -109,3 +109,35 @@ void foo(int *p, int n) {
   }
 }
 ```
+
+# SCEV Rewriting / Folding
+Expression Rewrite Example
+𝐺+ 𝑒,+,𝑓 ⇒ 𝐺+𝑒,+,𝑓 12+ 7,+,3 ⇒ 19,+,3
+𝐺∗ 𝑒,+,𝑓 ⇒ 𝐺∗𝑒,+,𝐺∗𝑓 12∗ 7,+,3 ⇒ 84,+,36
+𝑒,+,𝑓 + 𝑔,+,ℎ ⇒ 𝑒+𝑔,+,𝑓+ℎ 7,+,3 + 1,+,1 ⇒ 8,+,4
+𝑒,+,𝑓 ∗ 𝑔,+,ℎ
+⇒ 𝑒∗𝑔,+,
+𝑒∗ℎ+𝑓∗𝑔+𝑓∗ℎ,
++,2∗𝑓∗ℎ
+0,+,1 ∗ 0,+,1 ⇒ 0,+,1,+,2
+
+# Usage
+## Canonical Loop
+## Loop Strength Reduce(LSR)
+Hoist loop invariant computation outside loop
+replace multiply with add
+
+1. Check Loop Form
+2. Collect Chains
+3. Collect Types and Factors
+4. Generate Formulas
+5. Solve and Implement
+## Dependence Analysis
+## Vectorize
+© 2017 Arm Limited 48 © 2018 Arm Limited   
+SCEV User - Vectorizers
+Vectorizers –Loop Vectorizer, SLP, Load-Store Vectorizer
+Use SCEV for 
+- Induction variable (step loop-invariant)
+- Trip count
+- Loop Access Analysis
