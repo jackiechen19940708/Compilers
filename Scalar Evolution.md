@@ -142,5 +142,15 @@ Use SCEV for
 - Trip count
 - Loop Access Analysis
 
+# LLVM files
+https://github.com/llvm/llvm-project/blob/main/llvm/include/llvm/Analysis/ScalarEvolution.h
+// The ScalarEvolution class is an LLVM pass which can be used to analyze and
+// categorize scalar expressions in loops.  It specializes in recognizing
+// general induction variables, representing them with the abstract and opaque
+// SCEV class.  Given this analysis, trip counts of loops and other important
+// properties can be obtained.
+//
+// This analysis is primarily useful for induction variable substitution and
+// strength reduction.
 # Acknowledgement
 https://llvm.org/devmtg/2018-04/slides/Absar-ScalarEvolution.pdf
