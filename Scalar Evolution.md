@@ -141,3 +141,6 @@ Use SCEV for
 - Induction variable (step loop-invariant)
 - Trip count
 - Loop Access Analysis
+
+# Acknowledgement
+https://llvm.org/devmtg/2018-04/slides/Absar-ScalarEvolution.pdf
