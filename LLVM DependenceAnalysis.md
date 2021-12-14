@@ -19,6 +19,7 @@ unique_ptr<Dependence> DependenceInfo::depends(Instruction* Src, Instruction* Ds
   Loop Carried
   for i
      A[i+1] = A[i]
+  此时有依赖距离（Dependence Distance）的概念，通常是常量; 可能出现多维距离
 
 
 
