@@ -38,21 +38,21 @@ MergeFunction,OpenMPOpt,HotColdSplitting,Devirtualization
 
 
 ### AlwaysInliner
-CGSCC
+CGSCC pass
 AlwaysInliner.h AlwaysInliner.cpp
 Implement a custom inliner handling only functions that are marked as "always inline"
 old: AlwaysInlinerLegacyPass
 new: AlwaysInlinerPass
 
 ### AnnotationMetadataPass
-Module
+Module pass
 Annotation2Metadata.h Annotation2Metadata.cpp
 convert @llvm.global.annotations to !annotation metadata
 old:Annotation2MetadataLegacy
 new:Annotation2MetadataPass
 
 ### ArgumentPromotion
-CGSCC
+CGSCC pass
 ArgumentPromotion.h ArgumentPromotion.cpp
 This pass promotes by reference arguments to be by value arguments. Means looking for internal functions that have pointer arguments。
 If it can prove， through the use of alias analysis, an argument is only loaded, then it can pass the value into the function instead of the address of the value.
@@ -65,9 +65,27 @@ Can also handled arguments which only store to if LLVM support multiple return v
 old:
 new:
 
-### Attributor
-ModulePass
-Attributor.cpp Attributor.h
+### Attributor & AttributorAttributes
+Module Pass
+CGSCC pass
+Attributor.cpp Attributor.h AttributorAttributes.cpp
 An inter procedural "attribute" deduction framework. It can deduce & propagate attributes.
 old:
 new:
+
+### BarrierNoopPass
+ModulePass
+A nounce pass, can manipulate implicitly nesting pass manager. For example can be used to cause a CGSCC pass manager to be closed prior to running a new collection of function passes.
+BarrierNoopPass.cpp
+
+old:
+
+### BlockExtractor
+ModulePass
+BlockExtractor.h BlockExtractor.cpp
+extract specified basic block from the module into their own function.
+
+old:
+new:
+
+#
