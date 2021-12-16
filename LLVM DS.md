@@ -26,3 +26,5 @@
 
 # AbstractAttribute
 add new attribute
+
+# GlobalVariable
