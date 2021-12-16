@@ -88,4 +88,17 @@ extract specified basic block from the module into their own function.
 old:
 new:
 
-#
+### CalledValuePropagatoin
+ModulePass
+CalledValuePropagation.h CalledValuePropagation.cpp
+A transformation that attaches !callees metadata to indirect call site. Can indicate the set of functions the call site could possibly target at run-time
+old:
+new:
+### ConstantMerge
+ModulePass
+### CrossDSOCFI
+ModulePass
+CrossDSOCFI.h CrossDSOCFI.cpp
+export all llvm.bitset's found in the module in the form of \_\_cfi_check function, which can be used to verify cross-DSO call targets
+old:
+new:
