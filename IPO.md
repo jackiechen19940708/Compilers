@@ -96,6 +96,10 @@ old:
 new:
 ### ConstantMerge
 ModulePass
+ConstantMerge.cpp ConstantMerge.h
+merge duplicate global constants together into a single constant that is shared.This is useful because some passes(TraceValues) insert a lot of string constants into the program, regardless of whether or not an existing string is available
+old：
+new:
 ### CrossDSOCFI
 ModulePass
 CrossDSOCFI.h CrossDSOCFI.cpp
