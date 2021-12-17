@@ -229,21 +229,76 @@ new:
 ### IPO
 IPO whole interface for initialize
 ### IROutliner
+ModulePass
+IROutliner.cpp IROutliner.h
+Use IRSimilarityIdentifier to identify the similar region of code. It evaluate each set of IRSimilarityCandidates with an estimate of whether it will provide code size reduction. Each region is extracted using the code extractor. These extracted functions are consolidated into a single function and called the extracted call sites.
+example
+```
+%1 = add i32 %a, %b
+%2 = add i32 %b, %a
+%3 = add i32 %b, %a
+%4 = add i32 %a, %b
+```
 
+```
+define internal void outlined_ir_function(i32 %0,i32 %1){
+    %1 = add i32 %0,%1
+    %2 = add i32 %1,%0
+    ret void
+}
+call void outlined_ir_function(i32 %a, i32 %b)
+call void outlined_ir_function(i32 %b, i32 %a)
+```
+
+old:
+new:
 ### LoopExtractor
-
+ModulePass
+LoopExtractor.cpp LoopExtractor.h
+extract each top-level loop into its own new function. if is the only loop in a given function, not change. 
+most useful for debugging via bugpoint
+old
+new
 ### LowerTypeTests
+ModulePass 
+LowerTypeTests.cpp LowerTypeTests.h
+A layout algorithm for globals referenced by bit sets that tries to keep members of small bit sets together. This can siginicantly reduce bit set sizes.
+There is an algorithm here
+old
+new
 
 ### MergeFunctions
+ModulePass
+This pass looks for equivalent functions that are mergable and folds them
+MergeFunctions.cpp MergeFunctions.h
+old
+new
 
+future will consider virtual function
 ### OpenMPOpt
+CGSCCPass
+OpenMPOpt.cpp OpenMPOpt.h
+deduplicate of runtime calls(omp_get_thread_num)
+replace globalized device memory with stack memory or shared memory
+parallel region merging
+transform generic-mode device kernels to SPMD mode
+specialize the state machine for generic-mode device kernels
 
+old
+new
 ### PartialInlining
-
+ModulePass
+PartialInline.h PartialInline.cpp
+partial inline, typically by inlining an if statement that surrounds the body of the function
+old:
+new:
 ### PassManagerBuilder
-
+PassManagerBuilder.cpp PassManagerBuilder.h
+used to set up a standard optimization sequence suitable for language like C and C++
 ### PruneEH
-
+CGSCCPass
+walk call graph(bottom-up traversal of the call graph), turning invoke instructions into calls,iff the callee cannot throw an exception and mark function nounwind if they cannot throw.
+old:
 ### SampleContextTracker
 
 ### SampleProfile
