@@ -189,7 +189,8 @@ new:
 ### HotColdSplitting
 ModulePass
 HotColdSplitting.cpp HotColdSplitting.h
-Help improve memory locality of code. identify cold blocks and move them into separate function
+Help improve memory locality of code. identify cold blocks and move them into separate function.
+When the splitting pass finds a cold block, it grows a maximal cold region around that block. the maximal region contains all blocks post-dominated by the sink. In theory, these blocks are as cold as the sink. Once a region is found, it's split out of the original function provided it's profitable to do so.
 
 can improve:
 use PM to get domtrees and preserve BFI&BPI
@@ -198,9 +199,20 @@ reorder outlined function
 old:
 new:
 ### InferFunctionAttrs
+ModulePass
+InferFunctionAttrs.h InferFunctionAttrs.cpp
+infer implicit function attributes from the name and signature of function declaration.
+
+old:
+new
 
 ### Inliner
-
+CGSCC
+Inliner.h Inliner.cpp
+implement the mechanic required to implement inline without missing any calls and updating the call graph. the decisions of which calls are profitable to inline are implemented eleswhere.
+Base class for inline, provide helper function.
+old:
+new:
 ### InlinSimple
 
 ### Internalize
