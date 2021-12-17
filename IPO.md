@@ -150,6 +150,7 @@ old:
 new:
 
 ### FunctionSpecialization
+FunctionSpecialization.cpp
 not a pass, can be called from other pass
 specialise function with constant parameter, with a function specializatoin attribute for arguments, we could have a direct way to steer function specialization, avoiding the cost-model, and thus control compile-times/ code-size
 
@@ -160,4 +161,83 @@ have some limitation:
 (4)cost model not perfect
 (5)not caching result
 
+### GlobalDCE
+ModulePass
+eliminate unreachable internal globals from the program.
+use an aggressive algorithm, searching out globals that are known to be alive. After find all of the globals which are needed, it delete whatever is left over.
+GlobalIDCE.cpp GlobalIDCE.h
+
+old:
+new:
+
+### GlobalOpt
+ModulePass
+transform simple global variables that never have their address taken. if true, marks read write globals as constant, delete variables only stored to
+GlobalOpt.h GLobalOpt.cpp
+
+old:
+new:
+
+### GlobalSplit
+ModulePass
+use inrange annotations on GEP indices to split globals where beneficial.
+can optimize whole-program virtual call optimization and cfi
+GlobalSplit.cpp GlobalSplit.h
+old:
+new:
+
+### HotColdSplitting
+ModulePass
+HotColdSplitting.cpp HotColdSplitting.h
+Help improve memory locality of code. identify cold blocks and move them into separate function
+
+can improve:
+use PM to get domtrees and preserve BFI&BPI
+reorder outlined function
+
+old:
+new:
+### InferFunctionAttrs
+
+### Inliner
+
+### InlinSimple
+
+### Internalize
+
+### IPO
+
+### IROutliner
+
+### LoopExtractor
+
+### LowerTypeTests
+
+### MergeFunctions
+
+### OpenMPOpt
+
+### PartialInlining
+
+### PassManagerBuilder
+
+### PruneEH
+
+### SampleContextTracker
+
+### SampleProfile
+
+### SampleProfileProbe
+
+### SCCP
+
+### StripDeadPrototypes
+
+### StripSymbols
+
+### SyntheticCountsPropagation
+
+### ThinLTOBitcodeWriter
+
+### WholeProgramDevirt
 
