@@ -214,11 +214,20 @@ Base class for inline, provide helper function.
 old:
 new:
 ### InlinSimple
-
+CGSCC 
+InlineCost.cpp
+bottom up inline of functions into callees
+a simple inline method
 ### Internalize
-
+ModulePass
+loop over all of the function and variable in the input module.
+if function or variable doesn't need to be preserved according to hte client supplied callback, it's marked as internal
+if a function is only used from within this module, it can internalize a function with external linkage. 
+Internalize.h Internalize.cpp
+old:
+new:
 ### IPO
-
+IPO whole interface for initialize
 ### IROutliner
 
 ### LoopExtractor
