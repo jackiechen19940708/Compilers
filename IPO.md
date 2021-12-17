@@ -102,7 +102,62 @@ old：
 new:
 ### CrossDSOCFI
 ModulePass
+https://clang.llvm.org/docs/ControlFlowIntegrity.html
 CrossDSOCFI.h CrossDSOCFI.cpp
 export all llvm.bitset's found in the module in the form of \_\_cfi_check function, which can be used to verify cross-DSO call targets
 old:
 new:
+
+### DeadArgumentElimination
+ModulePass
+delete dead arguments from internal functions. often useful as a cleanup pass to run after aggressive interprocedural passes,which add possibly-dead arguments or return values
+DeadArgumentElimination.h DeadArgumentElimination.cpp
+old:
+new:
+
+### ElimAvailExtern
+ModulePass
+eliminate available external global definitions from the program, turning them into declaration
+ElimAvailExtern.cpp ElimAvailExtern.h
+old:
+new:
+
+### ExtractGV
+ModulePass
+extract global value
+ExtractGV.cpp
+old:
+
+### ForceFunctionAttrs
+ModulePass
+add attribute from commandline to function for debuging
+ForceFunctionAttrs.cpp ForceFunctionAttrs.h
+old:
+new:
+
+### FunctionAttrs
+ModulePass CGSCCPass
+walk the call graph deduce or propagate function attribute
+FunctionAttrs.h FunctionAttrs.cpp
+old:
+new:
+
+### FunctionImport
+ModulePass
+import function based on summary
+FunctionImport.cpp FunctionImport.h
+old:
+new:
+
+### FunctionSpecialization
+not a pass, can be called from other pass
+specialise function with constant parameter, with a function specializatoin attribute for arguments, we could have a direct way to steer function specialization, avoiding the cost-model, and thus control compile-times/ code-size
+
+have some limitation:
+(1)can not handle recursive function
+(2)can not handle integer range
+(3)only 1 argument is specialised
+(4)cost model not perfect
+(5)not caching result
+
+
