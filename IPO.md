@@ -324,6 +324,9 @@ Assume BasicBlocks are dead unless proven otherwise
 Proves values to be constant, and replaces them with constants
 Proves conditional branches to be unconditional
 SCCP.h SCCP.cpp
+
+Compile Time run with constants.
+
 new:
 old:
 ### StripDeadPrototypes
