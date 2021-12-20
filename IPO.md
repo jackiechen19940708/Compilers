@@ -1,11 +1,12 @@
 # A Deep Dive into the Interprocedural Optimization Infrastructure
 https://www.youtube.com/watch?v=I4Iv-HefknA
 ## IPO
+passes consider more than one function
 ### intra procedural
 1. Analysis Pass
 2. Loop Pass
 3. Function Pass
-### intra procedural
+### inter procedural
 1. CGSCC Pass
 input is SCC; applied post order(bottom up)
 Allow modify current SCC; add or remove globals
