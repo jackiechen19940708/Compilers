@@ -1,0 +1,8 @@
+@<GlobalVarName> = [Linkage] [PreemptionSpecifier] [Visibility]
+                   [DLLStorageClass] [ThreadLocal]
+                   [(unnamed_addr|local_unnamed_addr)] [AddrSpace]
+                   [ExternallyInitialized]
+                   <global | constant> <Type> [<InitializerConstant>]
+                   [, section "name"] [, partition "name"]
+                   [, comdat [($name)]] [, align <Alignment>]
+                   (, !name !N)*
