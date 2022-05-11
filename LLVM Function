@@ -1,0 +1,7 @@
+define [linkage] [PreemptionSpecifier] [visibility] [DLLStorageClass]
+       [cconv] [ret attrs]
+       <ResultType> @<FunctionName> ([argument list])
+       [(unnamed_addr|local_unnamed_addr)] [AddrSpace] [fn Attrs]
+       [section "name"] [partition "name"] [comdat [($name)]] [align N]
+       [gc] [prefix Constant] [prologue Constant] [personality Constant]
+       (!name !N)* { ... }
