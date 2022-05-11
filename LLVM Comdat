@@ -1,0 +1,85 @@
+COMDAT是什么，据说很多资深大佬都不清楚
+最近对COMDAT的关注，也是由于对LLVM代码调试所引起的。在网上收集了很多的前辈写的博文和资料，却没有一个能把COMDAT讲清楚的。所以希望写下这个文章和大家共同学习探讨编译/链接中的COMDAT。
+
+问题背景
+所谓的COMDAT，是COMDAT段（Section）。COMDAT段被多个目标文件所定义的辅助段。该段的作用是将在多个已编译模块中重复的代码和数据的逻辑块组合在一起。COMDAT在C++的虚函数表和模板的编译链接中，起着非常重要的作用。
+
+COMDAT段（Section）是对8086目标文件原始集合的扩展。 它是在Microsoft C 7.0添加的。
+
+COMDAT
+当目标文件中有COMDAT段时，它还会指定一个标志，该标志指示链接器应如何解决冲突。这些标志选项包括：
+
+Microsoft便携式可执行和通用目标文件格式中提到的选项有
+
+IMAGE_COMDAT_SELECT_NODUPLICATES，如果此符号已定义，则链接器将发出一个多次定义符号的错误；
+
+IMAGE_COMDAT_SELECT_ANY，定义相同COMDAT符号的任何部分都可以链接，而其余的被删除；
+
+IMAGE_COMDAT_SELECT_SAME_SIZE，链接器在此符号的定义中任选一个。但如果所有定义的大小都不相同，则会发出多次定义符号的错误；
+
+IMAGE_COMDAT_SELECT_EXACT_MATCH，链接器在此符号的定义中任选一个。但如果所有定义不完全匹配，则会发出多次定义符号的错误。
+
+IMAGE_COMDAT_SELECT_ASSOCIATIVE，如果该段的辅助符号记录（auxiliary symbol record）中所指定的其它COMDAT段已链接，则该段已链接。COMDAT的格式如下图所示。对于具有多个部分中的组件的定义（例如：一个部分中的代码和另一部分中的数据）的定义很有用，但是必须将所有部分链接或作为一个集合丢弃。
+
+
+
+IMAGE_COMDAT_SELECT_LARGEST，链接器从该符号的定义中选择最大的。 如果多个定义具有此大小，则可以在它们之间进行任意选择。
+
+LLVM COMDAT IR
+对于强大的LLVM也缺不了对COMDAT的支持。LLVM IR中有专门的语法定义COMDAT IR来支持COMDAT的功能。
+
+LLVM中COMDAT它的名字表示了一个COMDAT的key。所有的global对象如果有COMDAT需要在其尾部指定COMDAT key。
+
+COMDAT IR的语法如下:
+
+$<Name> = comdat SelectionKind
+1
+SelectionKind必须为以下列出来的一种类型（对应与之前Microsoft便携式可执行和通用目标文件格式所介绍的，这里就不在赘述）：
+
+any
+
+exactmatch
+
+largest
+
+noduplicates
+
+samesize
+
+注意：XCOFF和Mach-O平台不支持COMDAT，而ELF和WebAssembly仅支持任何一种选择。
+
+一个小例子：
+
+$foo = comdat largest
+@foo = global i32 2, comdat($foo)
+
+define void @bar() comdat($foo) {
+  ret void
+}
+1
+2
+3
+4
+5
+6
+作为语法糖，如果COMDAT名称与全局名称相同，则可以省略$name：
+
+$foo = comdat any
+@foo = global i32 2, comdat
+1
+2
+Reference：
+http://wiki.dwarfstd.org/index.php?title=COMDAT_Type_Sections
+
+https://gcc.gnu.org/onlinedocs/gcc-4.4.3/gccint/C_002b_002b-ABI.html
+
+http://llvm.org/docs/LangRef.html#comdats
+
+https://en.wikipedia.org/wiki/Relocatable_Object_Module_Format
+
+https://en.wikipedia.org/wiki/COFF
+
+https://pierrelib.pagesperso-orange.fr/exec_formats/OMF_v1.1.pdf
+————————————————
+版权声明：本文为CSDN博主「ronnie88597」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_46222091/article/details/105084885
