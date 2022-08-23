@@ -10,7 +10,7 @@
 |  AddressSanitizer  | 编译期检查内存访问是否  |lib/Transforms/Instrumentation/AddressSantizer.cpp [Google Address Sanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizerAlgorithm) [AddressSanitizer算法及源码解析]([https://llvm.org/devmtg/2011-11/Serebryany_FindingRacesMemoryErrors.pdf](https://cloud.tencent.com/developer/article/1518165)) |
 |  BoundsChecking  | 检查memory访问是否越界  |lib/Transforms/Instrumentation/BoundsChecking.cpp  |
 |  CFGMST  | CFG最小生成树,用在GCOVProfiling和PGOInstrrumentation中  |lib/Transforms/Instrumentation/CFGMST.h  |
-|  ----  | ----  |----  |
+|  CGProfile  | call graph profile  |lib/Transforms/Instrumentation/CGProfile.cpp  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
