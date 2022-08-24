@@ -13,9 +13,9 @@
 |  CGProfile  | call graph profile  |lib/Transforms/Instrumentation/CGProfile.cpp  |
 |  ControlHeightReduction  | 属于PGO。根据profiling 的hot path合并条件Block，减少分支跳转  | lib/Transforms/Instrumentation/ControlHeightReduction.cpp  |
 |  DataFlowSanitizer  | Dynamic Dataflow Analysis  |[clang dfsan design](https://clang.llvm.org/docs/DataFlowSanitizerDesign.html)  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  GCOVProfiling  | 产生类似gcc的profiling数据  | lib/Transforms/Instrumentation/GCOVProfiling.cpp  |
+|  HWAddressSanitizer  | ----  |lib/Transforms/Instrumentation/HWAddressSanitizer.cpp [clang HWASAN](https://clang.llvm.org/docs/HardwareAssistedAddressSanitizerDesign.html)  |
+|  IndirectCallPromotion  | 在profiling data的辅助下，convert indirect call(函数指针) to conditional direct call （if else到固定函数），用于减少分支预测开销  |lib/Transforms/Instrumentation/IndirectCallPromotion.cpp  [高通 IndirectCallPromotion介绍](https://llvm.org/devmtg/2015-10/slides/Baev-IndirectCallPromotion.pdf)|
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
