@@ -166,10 +166,10 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  ObjCARCContract  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
 |  ObjCARCAPElim  | Objective-C automatic reference counting pass |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
 |  ObjCARCExpand  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  LoadStoreVectorizer  | memory coalescing O(Loads^4)  | lib/Transforms/Vectorize/LoadStoreVectorizer.cpp  |
+|  LoopVectorize  | for循环的SIMD化，分几部分 LoopVectorizationLegality合法性检查 InnerLoopVectorizer实施转化 LoopVectorizationCostModel判断收益  | lib/Transforms/Vectorize/LoopVectorizationLegality.cpp  lib/Transforms/Vectorize/LoopVectorize.cpp  lib/Transforms/Vectorize/VPlan* lib/Transforms/Vectorize/LoopVectorizationPlanner.h lib/Transforms/Vectorize/VPRecipeBuilder.h|
+|  SLPVectorizer  | bottom up SLP(superword level parallelism) vectorizer=> vectorize store  |lib/Transforms/Vectorize/SLPVectorizer.cpp  [gcc slp vectorize](https://www.yumpu.com/en/document/view/7464643/loop-aware-slp-in-gcc) |
+| VectorCombine  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
