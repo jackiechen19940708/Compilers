@@ -33,16 +33,10 @@
 |BlockExtractor| ModulePass extract specified basic block from the module into their own function|lib/Transforms/IPO/BlockExtractor.cpp|
 |CalledValuePropagation |ModulePass A transformation that attaches !callees metadata to indirect call site. Can indicate the set of functions the call site could possibly target at run-time |lib/Transforms/IPO/CalledValuePropagation.cpp|
 |ConstantMerge|ModulePass merge duplicate global constants together into a single constant that is shared.This is useful because some passes(TraceValues) insert a lot of string constants into the program, regardless of whether or not an existing string is available|lib/Transforms/IPO/ConstantMerge.cpp
-|CrossDSOCFI |ModulePass export all llvm.bitset's found in the module in the form of __cfi_check function, which can be used to verify cross-DSO call targets |[CFI](https://clang.llvm.org/docs/ControlFlowIntegrity.html) [cross dso cfi](https://struct.github.io/cross_dso_cfi.html)|
-
-DeadArgumentElimination
-ModulePass delete dead arguments from internal functions. often useful as a cleanup pass to run after aggressive interprocedural passes,which add possibly-dead arguments or return values DeadArgumentElimination.h DeadArgumentElimination.cpp old: new:
-
-ElimAvailExtern
-ModulePass eliminate available external global definitions from the program, turning them into declaration ElimAvailExtern.cpp ElimAvailExtern.h old: new:
-
-ExtractGV
-ModulePass extract global value ExtractGV.cpp old:
+|CrossDSOCFI |ModulePass export all llvm.bitset's found in the module in the form of \_\_cfi_check function, which can be used to verify cross-DSO call targets |lib/Transforms/IPO/CrossDSOCFI.cpp [CFI](https://clang.llvm.org/docs/ControlFlowIntegrity.html) [cross dso cfi](https://struct.github.io/cross_dso_cfi.html)|
+|DeadArgumentElimination|ModulePass delete dead arguments from internal functions. often useful as a cleanup pass to run after aggressive interprocedural passes,which add possibly-dead arguments or return values |lib/Transforms/IPO/DeadArgumentElimination.cpp|
+|ElimAvailExtern| ModulePass eliminate available external global definitions from the program, turning them into declaration| lib/Transforms/IPO/ElimAvailExtern.cpp|
+|ExtractGV|ModulePass extract global value ,只有老Pass才有|lib/Transforms/IPO/ExtractGV.cpp|
 
 ForceFunctionAttrs
 ModulePass add attribute from commandline to function for debuging ForceFunctionAttrs.cpp ForceFunctionAttrs.h old: new:
@@ -168,10 +162,10 @@ ModulePass prepare a module containing type metadata for ThinLTO by splitting it
 
 WholeProgramDevirt
 whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp new:
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  ObjCARCOpt  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)  |
+|  ObjCARCContract  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
+|  ObjCARCAPElim  | Objective-C automatic reference counting pass |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
+|  ObjCARCExpand  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
