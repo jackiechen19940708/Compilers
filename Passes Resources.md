@@ -16,16 +16,15 @@
 |  GCOVProfiling  | 产生类似gcc的profiling数据  | lib/Transforms/Instrumentation/GCOVProfiling.cpp  |
 |  HWAddressSanitizer  | ----  |lib/Transforms/Instrumentation/HWAddressSanitizer.cpp [clang HWASAN](https://clang.llvm.org/docs/HardwareAssistedAddressSanitizerDesign.html)  |
 |  IndirectCallPromotion  | 在profiling data的辅助下，convert indirect call(函数指针) to conditional direct call （if else到固定函数），用于减少分支预测开销  |lib/Transforms/Instrumentation/IndirectCallPromotion.cpp  [高通 IndirectCallPromotion介绍](https://llvm.org/devmtg/2015-10/slides/Baev-IndirectCallPromotion.pdf)|
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  InstrOrderFile  | 记录函数执行顺序  |lib/Transforms/Instrumentation/InstrOrderFile  |
+|  InstrProfiling  | ----  |lib/Transforms/Instrumentation/InstrProfiling.cpp  |
+|  MemorySanitizer  | 运行时，检测读取未初始化内存  | lib/Transforms/Instrumentation/MemorySanitizer.cpp [论文](http://goo.gl/QKbem)  [clang MemSanitizier](https://clang.llvm.org/docs/MemorySanitizer.html) [llvm conf msan](https://llvm.org/devmtg/2012-11/Serebryany_TSan-MSan.pdf) |
+|  MemProfiler  | 记录内存访问信息  |lib/Transforms/Instrumentation/MemProfiler.cpp  |
+|  PGOInstrumentation  | PGO 运行时打标记，分析程序热点  |lib/Transforms/Instrumentation/PGOInstrumentation.cpp [llvm conf PGOInstrumentation](https://llvm.org/devmtg/2020-09/slides/PGO_Instrumentation.pdf)  |
+|  PGOMemOPSizeOpt  | 根据profiling data优化memory intrinsic ，把变量size 特化 |lib/Transforms/Instrumentation/PGOMemOPSizeOpt.cpp  |
+|  PoisonChecking  | 检测LLVM IR中不合理的部分  |lib/Transforms/Instrumentation/PoisonChecking.cpp  |
+|  SanitizerCoverage  | 检测覆盖率  |lib/Transforms/Instrumentation/SanitizerCoverage.cpp [clang scov](https://clang.llvm.org/docs/SanitizerCoverage.html)  |
+|  ThreadSanitizer  | 为function call和内存访问添加一些标记,检测data race  |lib/Transforms/Instrumentation/ThreadSanitizer.cpp [clang tsan](https://clang.llvm.org/docs/ThreadSanitizer.html) |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
