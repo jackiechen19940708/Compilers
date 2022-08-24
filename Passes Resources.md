@@ -27,37 +27,13 @@
 |  ThreadSanitizer  | 为function call和内存访问添加一些标记,检测data race  |lib/Transforms/Instrumentation/ThreadSanitizer.cpp [clang tsan](https://clang.llvm.org/docs/ThreadSanitizer.html) |
 |AlwaysInliner|CGSCC pass Implement a custom inliner handling only functions that are marked as "always inline" |lib/Transforms/IPO/AlwaysInliner.cpp|
 |Annotation2Metadata|Module pass  add !annotation metadata for entries in @llvm.global.annotations| lib/Transforms/IPO/Annotation2Metadata.cpp|
-
-ArgumentPromotion
-CGSCC pass ArgumentPromotion.h ArgumentPromotion.cpp This pass promotes by reference arguments to be by value arguments. Means looking for internal functions that have pointer arguments。 If it can prove， through the use of alias analysis, an argument is only loaded, then it can pass the value into the function instead of the address of the value. This can cause recursive simplification of code and lead to the elimination of allocas(c++ template code like STL)
-
-This pass also handles aggregate arguments that are passed into a function, scalarizing them if the elements of the aggregate are only loaded.
-
-Can also handled arguments which only store to if LLVM support multiple return values from functions.
-
-old: new:
-
-Attributor & AttributorAttributes
-Module Pass CGSCC pass Attributor.cpp Attributor.h AttributorAttributes.cpp An inter procedural "attribute" deduction framework. It can deduce & propagate attributes. old: new:
-
-BarrierNoopPass
-ModulePass A nounce pass, can manipulate implicitly nesting pass manager. For example can be used to cause a CGSCC pass manager to be closed prior to running a new collection of function passes. BarrierNoopPass.cpp
-
-old:
-
-BlockExtractor
-ModulePass BlockExtractor.h BlockExtractor.cpp extract specified basic block from the module into their own function.
-
-old: new:
-
-CalledValuePropagatoin
-ModulePass CalledValuePropagation.h CalledValuePropagation.cpp A transformation that attaches !callees metadata to indirect call site. Can indicate the set of functions the call site could possibly target at run-time old: new:
-
-ConstantMerge
-ModulePass ConstantMerge.cpp ConstantMerge.h merge duplicate global constants together into a single constant that is shared.This is useful because some passes(TraceValues) insert a lot of string constants into the program, regardless of whether or not an existing string is available old： new:
-
-CrossDSOCFI
-ModulePass https://clang.llvm.org/docs/ControlFlowIntegrity.html CrossDSOCFI.h CrossDSOCFI.cpp export all llvm.bitset's found in the module in the form of __cfi_check function, which can be used to verify cross-DSO call targets old: new:
+|ArgumentPromotion| CGSCC pass This pass promotes by reference arguments to be by value arguments.可以减少内存访问|lib/Transforms/IPO/ArgumentPromotion.cpp [cmu 一个例子](https://www.cs.cmu.edu/afs/cs/academic/class/15745-s13/public/lectures/L3-LLVM-Overview.pdf)|
+|Attributor | Module Pass CGSCC pass inter procedural "attribute" deduction framework. It can deduce & propagate attributes|lib/Transforms/IPO/Attribuor.cpp [llvm conf attributor](https://llvm.org/devmtg/2019-10/slides/Doerfert-Attributor.pdf)|
+|BarrierNoop| ModulePass A nounce pass, can manipulate implicitly nesting pass manager. For example can be used to cause a CGSCC pass manager to be closed prior to running a new collection of function passes. 控制pass顺序，新passmanager没有|lib/Transforms/IPO/BarrierNoop.cpp|
+|BlockExtractor| ModulePass extract specified basic block from the module into their own function|lib/Transforms/IPO/BlockExtractor.cpp|
+|CalledValuePropagation |ModulePass A transformation that attaches !callees metadata to indirect call site. Can indicate the set of functions the call site could possibly target at run-time |lib/Transforms/IPO/CalledValuePropagation.cpp|
+|ConstantMerge|ModulePass merge duplicate global constants together into a single constant that is shared.This is useful because some passes(TraceValues) insert a lot of string constants into the program, regardless of whether or not an existing string is available|lib/Transforms/IPO/ConstantMerge.cpp
+|CrossDSOCFI |ModulePass export all llvm.bitset's found in the module in the form of __cfi_check function, which can be used to verify cross-DSO call targets |[CFI](https://clang.llvm.org/docs/ControlFlowIntegrity.html) [cross dso cfi](https://struct.github.io/cross_dso_cfi.html)|
 
 DeadArgumentElimination
 ModulePass delete dead arguments from internal functions. often useful as a cleanup pass to run after aggressive interprocedural passes,which add possibly-dead arguments or return values DeadArgumentElimination.h DeadArgumentElimination.cpp old: new:
