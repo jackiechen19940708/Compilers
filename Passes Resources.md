@@ -162,7 +162,10 @@ ModulePass prepare a module containing type metadata for ThinLTO by splitting it
 
 WholeProgramDevirt
 whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp new:
-|  ObjCARCOpt  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)  |
+
+| tmp  | tmp  | tmp |
+|  ----  | ----  |----  |
+|  ObjCARCOpt  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html) |
 |  ObjCARCContract  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
 |  ObjCARCAPElim  | Objective-C automatic reference counting pass |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
 |  ObjCARCExpand  | Objective-C automatic reference counting pass  |lib/Transforms/ObjCARC/* [clang ObjCARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html)   |
