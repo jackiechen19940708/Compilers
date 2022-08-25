@@ -169,9 +169,9 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  LoadStoreVectorizer  | memory coalescing O(Loads^4)  | lib/Transforms/Vectorize/LoadStoreVectorizer.cpp  |
 |  LoopVectorize  | for循环的SIMD化，分几部分 LoopVectorizationLegality合法性检查 InnerLoopVectorizer实施转化 LoopVectorizationCostModel判断收益  | lib/Transforms/Vectorize/LoopVectorizationLegality.cpp  lib/Transforms/Vectorize/LoopVectorize.cpp  lib/Transforms/Vectorize/VPlan* lib/Transforms/Vectorize/LoopVectorizationPlanner.h lib/Transforms/Vectorize/VPRecipeBuilder.h|
 |  SLPVectorizer  | bottom up SLP(superword level parallelism) vectorizer=> vectorize store  |lib/Transforms/Vectorize/SLPVectorizer.cpp  [gcc slp vectorize](https://www.yumpu.com/en/document/view/7464643/loop-aware-slp-in-gcc) |
-| VectorCombine  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+| VectorCombine  | vector指令替换  |lib/Transforms/Vector/VectorCombine.cpp  |
+|  ADCE  | 死代码消除，Dataflow Analysis的应用，先假定都是dead，然后分析reach  |lib/Transforms/Scalar/ADCE.cpp [R大介绍](https://www.zhihu.com/question/41959902/answer/93087273)  [blog](https://dongaxis.github.io/2016/05/31/LLVM-optimization-ADCE/) |
+|  AlignmentFromAssumptions  | ----  | lib/Transforms/Scalar/AlignmentFromAssumptions.cpp  [llvm rfc review](https://reviews.llvm.org/rGd67e4639016ec7bb1ad3e41b199f7ad11eaee09f)  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
