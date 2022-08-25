@@ -176,7 +176,7 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  ADCE  | 死代码消除，Dataflow Analysis的应用，先假定都是dead，然后分析reach  |lib/Transforms/Scalar/ADCE.cpp [R大介绍](https://www.zhihu.com/question/41959902/answer/93087273)  [blog](https://dongaxis.github.io/2016/05/31/LLVM-optimization-ADCE/) |
 |  AlignmentFromAssumptions  | llvm.assume相关的优化，需要先学习原语  | lib/Transforms/Scalar/AlignmentFromAssumptions.cpp  [llvm rfc review](https://reviews.llvm.org/rGd67e4639016ec7bb1ad3e41b199f7ad11eaee09f)  |
 |  AnnotationRemarks  | 为标记了!annotation的instruction生成remark  |lib/Transforms/Scalar/AnnotationRemarks.cpp  |
-|  ----  | ----  |----  |
+|  BDCE  | Bit-Tracking DCE，有些指令（位操作、移位操作等）会消除输入bit，此pass跟踪这些无效bit来消除与这些无效bit相关的指令，同时sext也会考虑替换为zext  |lib/Transforms/Scalar/BDCE.cpp  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
