@@ -174,8 +174,8 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  SLPVectorizer  | bottom up SLP(superword level parallelism) vectorizer=> vectorize store  |lib/Transforms/Vectorize/SLPVectorizer.cpp  [gcc slp vectorize](https://www.yumpu.com/en/document/view/7464643/loop-aware-slp-in-gcc) |
 | VectorCombine  | vector指令替换  |lib/Transforms/Vector/VectorCombine.cpp  |
 |  ADCE  | 死代码消除，Dataflow Analysis的应用，先假定都是dead，然后分析reach  |lib/Transforms/Scalar/ADCE.cpp [R大介绍](https://www.zhihu.com/question/41959902/answer/93087273)  [blog](https://dongaxis.github.io/2016/05/31/LLVM-optimization-ADCE/) |
-|  AlignmentFromAssumptions  | ----  | lib/Transforms/Scalar/AlignmentFromAssumptions.cpp  [llvm rfc review](https://reviews.llvm.org/rGd67e4639016ec7bb1ad3e41b199f7ad11eaee09f)  |
-|  ----  | ----  |----  |
+|  AlignmentFromAssumptions  | llvm.assume相关的优化，需要先学习原语  | lib/Transforms/Scalar/AlignmentFromAssumptions.cpp  [llvm rfc review](https://reviews.llvm.org/rGd67e4639016ec7bb1ad3e41b199f7ad11eaee09f)  |
+|  AnnotationRemarks  | 为标记了!annotation的instruction生成remark  |lib/Transforms/Scalar/AnnotationRemarks.cpp  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
