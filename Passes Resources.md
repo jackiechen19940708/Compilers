@@ -183,15 +183,15 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  CorrelatedValuePropagation  | 根据值传递，消除不必要的代码  |lib/Transforms/Scalar/CorrelatedValuePropagation.cpp  [论文例子4.24](https://www.politesi.polimi.it/bitstream/10589/92589/1/tesi.pdf) |
 |  DCE  | Dead Inst Elimination 扫一遍看没有用到的指令删除；Dead Code Elimination，扫多遍删除新的dead指令（来源于已删掉指令导致某些指令成为新的dead指令）比较简单，可以用来上手分析IR pass  |lib/Transforms/Scalar/DCE.cpp [DCE ppt](https://www.inf.ed.ac.uk/teaching/courses/ct/19-20/slides/llvm-4-deadcode.pdf)  |
 |  DeadStoreElimination  | 有些store的消除可能是有害的，比如向内存中额外写入数据来擦除关键信息  |lib/Transforms/Scalar/DeadStoreElimination.cpp [一个例子](https://cran.r-project.org/web/packages/rco/vignettes/opt-dead-store.html)  |
-|  DFAJumpThreading  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  DFAJumpThreading  | loop中的switch 优化  |lib/Transforms/Scalar/DFAJumpThreading.cpp [llvm RFC](https://reviews.llvm.org/D99205) |
+|  DivRemPairs  | 貌似是把div rem pair移到一个block中  |lib/Transforms/Scalar/DivRemPairs.cpp [llvm RFC](https://reviews.llvm.org/D37121) |
+|  EarlyCSE  | 遍历dominator tree，消除冗余指令  |lib/Transforms/Scalar/EarlyCSE.cpp [pass blogs example](https://blog.regehr.org/archives/1603)  |
+|  FlattenCFG  | 使用并列and 并列or来合并if条件，并合并相同的if body  |lib/Transforms/Scalar/FlattenCFGPass.cpp lib/Transforms/Utils/FlattenCFG.cpp |
+|  Float2Int  | 从float转int的指令出发（fptoui fptosi fcmp），遍历def-use链，转int  |lib/Transforms/Scalar/Float2Int.cpp  |
+|  GuardWidening  | need to learn llvm guard IR  |lib/Transforms/Scalar/GuardWidening.cpp lib/Transforms/Utils/GuardUtils.cc |
+|  GVN  | global value numbering on function(across basic block) |lib/Transforms/Scalar/GVN.cpp [plct gvn](https://www.bilibili.com/video/BV14b4y1X7uX?p=2&vd_source=d8b32fb6f52ab34863975f2f585cf269)  |
+|  GVNHoist | ----  |----  |
+|  GVNSink  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
