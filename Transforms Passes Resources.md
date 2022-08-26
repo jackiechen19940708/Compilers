@@ -190,35 +190,65 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  Float2Int  | 从float转int的指令出发（fptoui fptosi fcmp），遍历def-use链，转int  |lib/Transforms/Scalar/Float2Int.cpp  |
 |  GuardWidening  | need to learn llvm guard IR  |lib/Transforms/Scalar/GuardWidening.cpp lib/Transforms/Utils/GuardUtils.cc |
 |  GVN  | global value numbering on function(across basic block) |lib/Transforms/Scalar/GVN.cpp [plct gvn](https://www.bilibili.com/video/BV14b4y1X7uX?p=2&vd_source=d8b32fb6f52ab34863975f2f585cf269)  |
-|  GVNHoist | ----  |----  |
-|  GVNSink  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  GVNHoist | 把多个分支里的表达式，提到公共的dominator里，使用了GVN，目标是减少code size；某些情况也可以通过使能指令并行ILP减少关键路径  |lib/Transforms/Scalar/GVNHoist.cpp  |
+|  GVNSink  | 把逻辑相同的表达式，放到共同的successor中，使用了变种GVN（不要求value number一致，要求使用phi node后的逻辑一致）  |lib/Transforms/Scalar/GVNSink.cpp [例子](https://lists.llvm.org/pipermail/llvm-dev/2017-April/112471.html)  |
+|  InductiveRangeCheckElimination  | 把loop body里的循环边界检查，改为一段带边界检查的和不带边界检查的  |lib/Transforms/Scalar/InductiveRangeCheckElimination.cpp  |
+|  IndVarSimplify  | 将循环变量和相关计算转化为更简单的形式；如果终止条件有计算，也会化简计算 SCEV  |lib/Transforms/Scalar/IndVarSimplify.cpp [Euler SIG indvar examples](https://www.openeuler.org/zh/blog/20220706-bisheng-variable/20220706-variable.html)  |
+|  InferAddressSpaces  | [Nvidia写的，放到了common代码区域](https://rev.ng/gitlab/revng-bar-2019/llvm/-/commit/9be098398ca6f3e3c2c6c692d7e101e872fdf640)，推导变量地址类型 qualifer(例如CUDA \_\_shared__ \_\_global__)  |lib/Transforms/Scalar/InferAddressSpaces.cpp  |
+|  InstSimplifyPass  | ----  |----  |
+|  IVUsersPrinter  | ----  |----  |
+|  JumpThreading  | 把某些条件分支转为非条件跳转，以代码密度为代价提高执行速度（在有分支预测、预取、投机执行的硬件上）  |lib/Transforms/Scalar/JumpThreading.cpp [jump threading bloc](https://beza1e1.tuxen.de/articles/jump_threading.html)  |
+|  LICM  | ----  |----  |
+|  LoopAccessAnalysisPinter  | ----  |----  |
+|  LoopBoundSplit  | ----  |----  |
+|  LoopDataPrefetch  | ----  |----  |
+|  LoopDeletion  | ----  |----  |
+|  LoopDistribute  | ----  |----  |
+|  LoopFlatten  | ----  |----  |
+|  LoopFuse  | ----  |----  |
+|  LoopIdiomRecognize  | ----  |----  |
+|  LoopInstSimplify  | ----  |----  |
+|  LoopInterchange  | ----  |----  |
+|  LoopLoadElimination  | ----  |----  |
+|  LoopPassManager  | ----  |----  |
+|  LoopPedication  | ----  |----  |
+|  LoopRerollPass  | ----  |----  |
+|  LoopRotation  | ----  |----  |
+|  LoopSimplifyCFG  | ----  |----  |
+|  LoopSink  | ----  |----  |
+|  LoopStrengthReduce  | ----  |----  |
+|  LoopUnrollAndJam  | ----  |----  |
+|  LoopUnroll  | ----  |----  |
+|  LoopVersioningLICM  | ----  |----  |
+|  LowerAtomic  | ----  |----  |
+|  LowerConstantIntrinsics  | ----  |----  |
+|LowerExpectIntrinsic|||
+|LowerGuardIntrinsic|||
+|LowerMatrixIntrinsics|||
+|LowerWidenableCondition|||
+|MakeGuardsExplicit|||
+|MemcpyOptimizer|||
+|MergedLoadStoreMotion|||
+|MergeICmps|||
+|NaryReassociate|||
+|NewGVN|||
+|PartiallyInlineLibCalls|||
+|PlaceSafepoints|||
+|Reassociate
+|Reg2Mem|||
+|RewriteStatepointsForGC|||
+|Scalar|||
+|ScalarizeMaskedMemIntrin|||
+|Scalarizer|||
+|SCCP|||
+|SeparateConstOffsetFromGEP|||
+|SimpleLoopUnswitch|||
+|SimplifyCFG|||
+|Sink|||
+|SpeculativeExecution|||
+|SROA|||
+|StraightLineStrengthReduce|||
+|StructurizeCFG|||
+|TailRecursionElimination|||
+|TLSVariableHoist|||
+|WarnMissedTransforms|||
