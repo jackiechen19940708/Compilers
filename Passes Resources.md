@@ -177,13 +177,13 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  AlignmentFromAssumptions  | llvm.assume相关的优化，需要先学习原语  | lib/Transforms/Scalar/AlignmentFromAssumptions.cpp  [llvm rfc review](https://reviews.llvm.org/rGd67e4639016ec7bb1ad3e41b199f7ad11eaee09f)  |
 |  AnnotationRemarks  | 为标记了!annotation的instruction生成remark  |lib/Transforms/Scalar/AnnotationRemarks.cpp  |
 |  BDCE  | Bit-Tracking DCE，有些指令（位操作、移位操作等）会消除输入bit，此pass跟踪这些无效bit来消除与这些无效bit相关的指令，同时sext也会考虑替换为zext  |lib/Transforms/Scalar/BDCE.cpp  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
-|  ----  | ----  |----  |
+|  CallSiteSpliting  | 把一些条件调用、常量phi node 拆分调整顺序，使得传递的参数带更多约束，使能后续的pass优化，例如inliner、jump threading等等  |lib/Transforms/Scalar/CallSiteSpliting.cpp  |
+|  ConstantHoisting  | 常量变换，主要是用来减少codesize， arm用上了；核心从一般arm isa到thumb isa转换  |lib/Transforms/Scalar/ConstantHoisting.cpp  |
+|  ConstraintElimination  | 根据约束（从dominating条件收集来的）消除不必要的判断条件（必定真、假）  | lib/Transforms/Scalar/ConstraintElimination.cpp [llvm reviews](https://reviews.llvm.org/D84547) |
+|  CorrelatedValuePropagation  | 根据值传递，消除不必要的代码  |lib/Transforms/Scalar/CorrelatedValuePropagation.cpp  [论文例子4.24](https://www.politesi.polimi.it/bitstream/10589/92589/1/tesi.pdf) |
+|  DCE  | Dead Inst Elimination 扫一遍看没有用到的指令删除；Dead Code Elimination，扫多遍删除新的dead指令（来源于已删掉指令导致某些指令成为新的dead指令）比较简单，可以用来上手分析IR pass  |lib/Transforms/Scalar/DCE.cpp [DCE ppt](https://www.inf.ed.ac.uk/teaching/courses/ct/19-20/slides/llvm-4-deadcode.pdf)  |
+|  DeadStoreElimination  | 有些store的消除可能是有害的，比如向内存中额外写入数据来擦除关键信息  |lib/Transforms/Scalar/DeadStoreElimination.cpp [一个例子](https://cran.r-project.org/web/packages/rco/vignettes/opt-dead-store.html)  |
+|  DFAJumpThreading  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
 |  ----  | ----  |----  |
