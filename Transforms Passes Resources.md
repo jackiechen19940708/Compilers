@@ -195,8 +195,8 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  InductiveRangeCheckElimination  | 把loop body里的循环边界检查，改为一段带边界检查的和不带边界检查的  |lib/Transforms/Scalar/InductiveRangeCheckElimination.cpp  |
 |  IndVarSimplify  | 将循环变量和相关计算转化为更简单的形式；如果终止条件有计算，也会化简计算 SCEV  |lib/Transforms/Scalar/IndVarSimplify.cpp [Euler SIG indvar examples](https://www.openeuler.org/zh/blog/20220706-bisheng-variable/20220706-variable.html)  |
 |  InferAddressSpaces  | [Nvidia写的，放到了common代码区域](https://rev.ng/gitlab/revng-bar-2019/llvm/-/commit/9be098398ca6f3e3c2c6c692d7e101e872fdf640)，推导变量地址类型 qualifer(例如CUDA \_\_shared__ \_\_global__)  |lib/Transforms/Scalar/InferAddressSpaces.cpp  |
-|  InstSimplifyPass  | ----  |----  |
-|  IVUsersPrinter  | ----  |----  |
+|  InstSimplify  | 看起来像DeadInst消除，但是和DCE是啥关系？  |lib/Transforms/Scalar/InstSimplifyPass.cpp |
+|  IVUsersPrinter  | 是个Analysis pass的结果打印，打印inductive variable 表达式的user  |lib/Transforms/Scalar/IVUsersPrinter.cpp   |
 |  JumpThreading  | 把某些条件分支转为非条件跳转，以代码密度为代价提高执行速度（在有分支预测、预取、投机执行的硬件上）  |lib/Transforms/Scalar/JumpThreading.cpp [jump threading bloc](https://beza1e1.tuxen.de/articles/jump_threading.html)  |
 |  LICM  | ----  |----  |
 |  LoopAccessAnalysisPinter  | ----  |----  |
