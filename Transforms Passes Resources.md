@@ -209,7 +209,7 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  LoopIdiomRecognize  | 把一些简单的loop改为非loop的intrinsic指令(memset memcpy memmove等待) ，甚至可以做矩阵计算的识别，有点像emit insn |lib/Transforms/Scalar/LoopIdiomRecognize.cpp  |
 |  LoopInstSimplify  | loop里的一些dead 指令消除等  |lib/Transforms/Scalar/LoopInstSimplify.cpp [RFC](https://reviews.llvm.org/rG4cbcbb0761325099ff63927ef8bf36e97dc43c7f)  |
 |  LoopInterchange  | 改变loop的顺序，使得更加cache friendly |lib/Transforms/Scalar/LoopInterchange.cpp [RFC](https://reviews.llvm.org/D7432) [Euler interchange](https://www.openeuler.org/zh/blog/20220802-loop-interchange/20220802-loop-interchange.html)  |
-|  LoopLoadElimination  | ----  |----  |
+|  LoopLoadElimination  | 使用LoopAccessAnalysis的结果，把有loop carry依赖距离为1的store和load进行优化，消除后一次的load  |lib/Transforms/Scalar/LoopLoadElimination.cpp  |
 |  LoopPassManager  | ----  |----  |
 |  LoopPedication  | ----  |----  |
 |  LoopRerollPass  | ----  |----  |
