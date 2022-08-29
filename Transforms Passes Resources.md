@@ -210,16 +210,18 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  LoopInstSimplify  | loop里的一些dead 指令消除等  |lib/Transforms/Scalar/LoopInstSimplify.cpp [RFC](https://reviews.llvm.org/rG4cbcbb0761325099ff63927ef8bf36e97dc43c7f)  |
 |  LoopInterchange  | 改变loop的顺序，使得更加cache friendly |lib/Transforms/Scalar/LoopInterchange.cpp [RFC](https://reviews.llvm.org/D7432) [Euler interchange](https://www.openeuler.org/zh/blog/20220802-loop-interchange/20220802-loop-interchange.html)  |
 |  LoopLoadElimination  | 使用LoopAccessAnalysis的结果，把有loop carry依赖距离为1的store和load进行优化，消除后一次的load  |lib/Transforms/Scalar/LoopLoadElimination.cpp  |
-|  LoopPassManager  | ----  |----  |
-|  LoopPedication  | ----  |----  |
-|  LoopRerollPass  | ----  |----  |
-|  LoopRotation  | ----  |----  |
-|  LoopSimplifyCFG  | ----  |----  |
-|  LoopSink  | ----  |----  |
-|  LoopStrengthReduce  | ----  |----  |
-|  LoopUnrollAndJam  | ----  |----  |
-|  LoopUnroll  | ----  |----  |
-|  LoopVersioningLICM  | ----  |----  |
+|  LoopPassManager  | 一系列loop pass的集合，对loop的形式和analysis有了一定的保证  |lib/Transforms/Scalar/LoopPassManager.cpp  |
+|  LoopPredication  | 把loop中的判断条件变严，使得可以外提；并把不能外提的情形写为else分支  |lib/Transforms/Scalar/LoopPredication.cpp  |
+|  LoopRerollPass  | 反unroll，把loop body中的语句转为for loop,可以减小代码size  |lib/Transforms/Scalar/LoopRerollPass.cpp [commits](https://smlnj-gitlab.cs.uchicago.edu/manticore/llvm/commit/bebe48dbfe00078329341945bfb11f778ace6d12)  |
+|  LoopRotation  | 将pass转为do while形式  |lib/Transforms/Scalar/LoopRotation.cpp  |
+|  LoopSimplifyCFG  | 把loop 简化，例如合并basic block，删除一些不必要的block、edge  |lib/Transforms/Scalar/LoopSimplifyCFG.cpp [commits](https://smlnj-gitlab.cs.uchicago.edu/manticore/llvm/commit/e98524387e5e649fbfae23e900074c83b5a6ee68)  |
+|  LoopSink  | LICM的反向操作，把preheader中的指令放到loop中去，如果改变后其频率更低了 |lib/Transforms/Scalar/LoopSink.cpp  |
+|  LoopStrengthReduce  | 循环中循环变量及其相关计算的简化，例如数组下标  |lib/Transforms/Scalar/LoopStrengthReduce.cpp [6120](https://www.cs.cornell.edu/courses/cs6120/2019fa/blog/strength-reduction-pass-in-llvm/)  [Scalar Evolution](https://zhuanlan.zhihu.com/p/59539229) [Scalar Evolution](https://www.youtube.com/watch?v=AmjliNp0_00)|
+|  LoopUnrollAndJam  | Unrolling the outer loop. Then jamming (fusing) bodies of
+the inner loops.• Helps better cache utilization
+  |lib/Transforms/Scalar/LoopUnrollAndJamPass.cpp lib/Transforms/Utils/UnrollLoopAndJam.cpp [unroll and jam](https://llvm.org/docs/TransformMetadata.html#unroll-and-jam)  [毕昇编译](https://github.com/jackiechen19940708/Compilers/blob/main/bisheng%20compiler.pdf) |
+|  LoopUnroll  | 循环展开  |lib/Transforms/Scalar/LoopUnrollPass.cpp  |
+|  LoopVersioningLICM  | 当alias analysis是不确定的时候，要用loop version做LICM；拷贝一份激进的alias，同时添加运行时memory检查，检查结果决定走哪个loop分支  |----  |
 |  LowerAtomic  | ----  |----  |
 |  LowerConstantIntrinsics  | ----  |----  |
 |LowerExpectIntrinsic|||
