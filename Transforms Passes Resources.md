@@ -198,8 +198,8 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  InstSimplify  | 看起来像DeadInst消除，但是和DCE是啥关系？  |lib/Transforms/Scalar/InstSimplifyPass.cpp |
 |  IVUsersPrinter  | 是个Analysis pass的结果打印，打印inductive variable 表达式的user  |lib/Transforms/Scalar/IVUsersPrinter.cpp   |
 |  JumpThreading  | 把某些条件分支转为非条件跳转，以代码密度为代价提高执行速度（在有分支预测、预取、投机执行的硬件上）  |lib/Transforms/Scalar/JumpThreading.cpp [jump threading bloc](https://beza1e1.tuxen.de/articles/jump_threading.html)  |
-|  LICM  | ----  |----  |
-|  LoopAccessAnalysisPinter  | ----  |----  |
+|  LICM  | LoopInvariantCodeMotion,把循环不变的指令，移动到loop的header或者exiter中  |lib/Transforms/Scalar/LICM.cpp [cmu LICM](https://www.cs.cmu.edu/afs/cs/academic/class/15745-s15/public/lectures/L10-LICM.pdf) |
+|  LoopAccessAnalysisPinter  | 打印LoopAccessAnalysis的结果  |lib/Transforms/Scalar/LoopAccessAnalysisPrinter.cpp  |
 |  LoopBoundSplit  | ----  |----  |
 |  LoopDataPrefetch  | ----  |----  |
 |  LoopDeletion  | ----  |----  |
