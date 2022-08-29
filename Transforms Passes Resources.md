@@ -221,9 +221,9 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 the inner loops.• Helps better cache utilization
   |lib/Transforms/Scalar/LoopUnrollAndJamPass.cpp lib/Transforms/Utils/UnrollLoopAndJam.cpp [unroll and jam](https://llvm.org/docs/TransformMetadata.html#unroll-and-jam)  [毕昇编译](https://github.com/jackiechen19940708/Compilers/blob/main/bisheng%20compiler.pdf) |
 |  LoopUnroll  | 循环展开  |lib/Transforms/Scalar/LoopUnrollPass.cpp  |
-|  LoopVersioningLICM  | 当alias analysis是不确定的时候，要用loop version做LICM；拷贝一份激进的alias，同时添加运行时memory检查，检查结果决定走哪个loop分支  |----  |
-|  LowerAtomic  | ----  |----  |
-|  LowerConstantIntrinsics  | ----  |----  |
+|  LoopVersioningLICM  | 当alias analysis是不确定的时候，要用loop version做LICM；拷贝一份激进的alias，同时添加运行时memory检查，检查结果决定走哪个loop分支  |lib/Transforms/Scalar/LoopVersioningLICM.cpp [llvm conf](https://llvm.org/devmtg/2015-10/slides/Nema-LoopVersioningLICM.pdf)  |
+|  LowerAtomic  | 在非抢占环境中中，把原子原语变为非原子原语  |lib/Transforms/Scalar/LowerAtomicPass.cpp lib/Transforms/Utils/LowerAtomic.cpp  |
+|  LowerConstantIntrinsics  | 把objectsize和is.constant原语lower并提供常量传播和CFG化简  |----  |
 |LowerExpectIntrinsic|||
 |LowerGuardIntrinsic|||
 |LowerMatrixIntrinsics|||
