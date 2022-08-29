@@ -200,15 +200,15 @@ whole program devirtualization??? WholeProgramDevirt.h WholeProgramDevirt.cpp ne
 |  JumpThreading  | 把某些条件分支转为非条件跳转，以代码密度为代价提高执行速度（在有分支预测、预取、投机执行的硬件上）  |lib/Transforms/Scalar/JumpThreading.cpp [jump threading bloc](https://beza1e1.tuxen.de/articles/jump_threading.html)  |
 |  LICM  | LoopInvariantCodeMotion,把循环不变的指令，移动到loop的header或者exiter中  |lib/Transforms/Scalar/LICM.cpp [cmu LICM](https://www.cs.cmu.edu/afs/cs/academic/class/15745-s15/public/lectures/L10-LICM.pdf) |
 |  LoopAccessAnalysisPinter  | 打印LoopAccessAnalysis的结果  |lib/Transforms/Scalar/LoopAccessAnalysisPrinter.cpp  |
-|  LoopBoundSplit  | ----  |----  |
-|  LoopDataPrefetch  | ----  |----  |
-|  LoopDeletion  | ----  |----  |
-|  LoopDistribute  | ----  |----  |
-|  LoopFlatten  | ----  |----  |
-|  LoopFuse  | ----  |----  |
-|  LoopIdiomRecognize  | ----  |----  |
-|  LoopInstSimplify  | ----  |----  |
-|  LoopInterchange  | ----  |----  |
+|  LoopBoundSplit  | 把循环body中有条件判断的拆成两个循环，第一个循环不含此判断条件，第二个循环判断条件外提  |lib/Transforms/Scalar/LoopBoundSplit.cpp  |
+|  LoopDataPrefetch  | 插入intrinsic函数：PrefetchFunc  |lib/Transforms/Scalar/LoopDataPrefetch.cpp  |
+|  LoopDeletion  | 把对结果没有用、且无副作用的loop删除  | lib/Transforms/Scalar/LoopDeletion.cpp |
+|  LoopDistribute  |把有依赖的loop拆分为两部分，没有依赖的部分可以进一步vectorize  |lib/Transforms/Scalar/LoopDistribute.cpp [llvm Loop Fusion, Loop Distribution and their Place in the Loop Optimization Pipeline - Kit Barton (IBM)](https://www.youtube.com/watch?v=-JQr9aNagQo)  |
+|  LoopFlatten  | 多层for loop摊平为一层for loop  |lib/Transforms/Scalar/LoopFlatten.cpp [RFC](https://reviews.llvm.org/D42365) [6120 flatten](https://www.cs.cornell.edu/courses/cs6120/2020fa/blog/loop-flatten/)  |
+|  LoopFuse  | loop融合  | lib/Transforms/Scalar/LoopFuse.cpp [thesis for loop fusion](https://webdocs.cs.ualberta.ca/~amaral/thesis/ChristopherBartonMSc.pdf) [Revisiting Loop Fusion, and its place](https://www.bilibili.com/video/BV1J34y1b7V8/?vd_source=d8b32fb6f52ab34863975f2f585cf269) |
+|  LoopIdiomRecognize  | 把一些简单的loop改为非loop的intrinsic指令(memset memcpy memmove等待) ，甚至可以做矩阵计算的识别，有点像emit insn |lib/Transforms/Scalar/LoopIdiomRecognize.cpp  |
+|  LoopInstSimplify  | loop里的一些dead 指令消除等  |lib/Transforms/Scalar/LoopInstSimplify.cpp [RFC](https://reviews.llvm.org/rG4cbcbb0761325099ff63927ef8bf36e97dc43c7f)  |
+|  LoopInterchange  | 改变loop的顺序，使得更加cache friendly |lib/Transforms/Scalar/LoopInterchange.cpp [RFC](https://reviews.llvm.org/D7432) [Euler interchange](https://www.openeuler.org/zh/blog/20220802-loop-interchange/20220802-loop-interchange.html)  |
 |  LoopLoadElimination  | ----  |----  |
 |  LoopPassManager  | ----  |----  |
 |  LoopPedication  | ----  |----  |
