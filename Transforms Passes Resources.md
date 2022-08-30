@@ -232,23 +232,22 @@ the inner loops.• Helps better cache utilization
 |MemcpyOptimizer|和memcpy、memset相关的优化，消除memcpy或者把一组store转化为memset|lib/Transforms/Scalar/MemCpyOptimizer.cpp |
 |MergedLoadStoreMotion|把多分支共同的store 下沉到共同的后继basic block中|lib/Transforms/Scalar/MergeLoadStoreMotion.cpp|
 |MergeICmps|把多个整数比较转化为memcmp，主要优化cpp的成员、非成员operator==,这样可以有更少的jump，降低分支预测概率和ICacheMiss，并是的code size变小|lib/Transforms/Scalar/MergeICmps.cpp|
-|NaryReassociate|加法表达式重新结合，以消除冗余计算,和Reassociate pass不一样|lib/Transforms/Scalar/NaryReassociate.cpp|
-|NewGVN|||
-|PartiallyInlineLibCalls|||
-|PlaceSafepoints|||
-|Reassociate
-|Reg2Mem|||
-|RewriteStatepointsForGC|||
-|Scalar|||
-|ScalarizeMaskedMemIntrin|||
-|Scalarizer|||
-|SCCP|||
-|SeparateConstOffsetFromGEP|||
-|SimpleLoopUnswitch|||
-|SimplifyCFG|||
-|Sink|||
-|SpeculativeExecution|||
-|SROA|||
+|NaryReassociate|考虑历史计算的表达式，加法表达式重新结合，以消除冗余计算,和Reassociate pass不一样|lib/Transforms/Scalar/NaryReassociate.cpp|
+|NewGVN| 新版的GVN，改善原有GVN的速度 | [thesis ppt](https://www.sable.mcgill.ca/~hendren/621/karthikhandouts.pdf) [New GVN RFC](https://lists.llvm.org/pipermail/llvm-dev/2016-November/107110.html)|
+|PartiallyInlineLibCalls|在不需要错误信息的情况下，用快速指令替换函数调用（例如sqrt本征指令）|lib/Transforms/Scalar/PartiallyInlineLibCalls.cpp|
+|PlaceSafepoints|在IR的合适位置放置GC safepoint| lib/Transforms/Scalar/PlaceSafepoints.cpp [llvm gc doc](https://bcain-llvm.readthedocs.io/projects/llvm/en/latest/Statepoints/#placesafepoints)|
+|Reassociate|将操作数赋予rank排序，进行重新结合，使能常量传播、CSE、LICM、PRE等等|lib/Transforms/Scalar/Reassociate.cpp|
+|Reg2Mem|将寄存器访问转变为load，和PromoteMemoryToRegister 功能相反；|lib/Transforms/Scalar/Reg2Mem.cpp [blue zhihu](https://www.zhihu.com/question/49642237) [blue phi](https://www.zhihu.com/question/24992774)|
+|RewriteStatepointsForGC|GC相关,重写call invoke指令使得relocation显式化|lib/Transforms/Scalar/RewriteStatepointsForGC.cpp [llvm gc doc](https://bcain-llvm.readthedocs.io/projects/llvm/en/latest/Statepoints/#rewritestatepointsforgc)|
+|ScalarizeMaskedMemIntrin|在不支持的架构上，替换masked memory本征指令，变为一个个load 设置了bit位的元素|lib/Transforms/Scalar/ScalarizeMaskedMemIntrin.cpp|
+|Scalarizer|在一些不支持vector指令的平台上，把vector操作变成scalar操作，使能更多优化机会；在vector平台中后续也有可能重vectorize化|lib/Transforms/Scalar/Scalarizer.cpp|
+|SCCP|稀疏条件常量传播,Dataflow Analysis 应用|lib/Transforms/Scalar/SCCP.cpp [plct sccp](https://www.bilibili.com/video/BV14b4y1X7uX?p=10&vd_source=d8b32fb6f52ab34863975f2f585cf269) [sccp analysis](https://tiba-jrchang.medium.com/sssccp-simple-sccp-pass-with-llvm-960fb0424714)|
+|SeparateConstOffsetFromGEP|复用相同部分，消除冗余的GEP，在nvptx下减轻寄存器压力|lib/Transforms/Scalar/SeparateConstOffsetFromGEP.cpp [blog](https://djolertrk.github.io/2021/11/05/optimize-AARCH64-backend-in-LLVM.html)|
+|SimpleLoopUnswitch|把loop中有条件的，拆分为多个loop，部分loop条件外提|lib/Transforms/Scalar/SimpleLoopUnswitch.cpp [6120](https://www.cs.cornell.edu/courses/cs6120/2019fa/blog/loop-unswitching/)|
+|SimplifyCFG|消除不必要的Basic Block，特定条件下合并BasicBlock|lib/Transforms/Scalar/SimplifyCFG.cpp |
+|Sink|把指令移到特定的后继BasicBlock中，使得在其他不需要的后继Basicblock中不需要再执行了|lib/Transforms/Scalar/Sink.cpp |
+|SpeculativeExecution|消除if else，幽灵执行，在GPU等执行判断条件昂贵的架构上有用|lib/Transforms/Scalar/SpeculativeExecution.cpp|
+|SROA|处理alloca指令，转为SSA register|lib/Transforms/Scalar/SROA.cpp [sroa pass example](https://blog.regehr.org/archives/1603)|
 |StraightLineStrengthReduce|||
 |StructurizeCFG|||
 |TailRecursionElimination|||
