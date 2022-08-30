@@ -223,16 +223,16 @@ the inner loops.• Helps better cache utilization
 |  LoopUnroll  | 循环展开  |lib/Transforms/Scalar/LoopUnrollPass.cpp  |
 |  LoopVersioningLICM  | 当alias analysis是不确定的时候，要用loop version做LICM；拷贝一份激进的alias，同时添加运行时memory检查，检查结果决定走哪个loop分支  |lib/Transforms/Scalar/LoopVersioningLICM.cpp [llvm conf](https://llvm.org/devmtg/2015-10/slides/Nema-LoopVersioningLICM.pdf)  |
 |  LowerAtomic  | 在非抢占环境中中，把原子原语变为非原子原语  |lib/Transforms/Scalar/LowerAtomicPass.cpp lib/Transforms/Utils/LowerAtomic.cpp  |
-|  LowerConstantIntrinsics  | 把objectsize和is.constant原语lower并提供常量传播和CFG化简  |----  |
-|LowerExpectIntrinsic|||
-|LowerGuardIntrinsic|||
-|LowerMatrixIntrinsics|||
-|LowerWidenableCondition|||
-|MakeGuardsExplicit|||
-|MemcpyOptimizer|||
-|MergedLoadStoreMotion|||
-|MergeICmps|||
-|NaryReassociate|||
+|  LowerConstantIntrinsics  | 把objectsize和is.constant原语lower并提供常量传播和CFG化简  |lib/Transforms/LowerConstantIntrinsics.cpp  |
+|LowerExpectIntrinsic|把expect原语转化为llvm metadata|lib/Transforms/Scalar/LowerExpectIntrinsic.cpp|
+|LowerGuardIntrinsic|把guard原语替换为deoptimize的条件调用|lib/Transforms/LowerGuardIntrinsic.cpp|
+|LowerMatrixIntrinsics|把matrix原语替换为vector操作|lib/Transforms/Scalar/LowerMatrixIntrinsics.cpp|
+|LowerWidenableCondition|把condition原语替换为默认value|lib/Transforms/Scalar/LowerWidenableCondition.cpp|
+|MakeGuardsExplicit|把guard原语转化为新的形式|lib/Transforms/Scalar/MakeGuardsExplicit.cpp|
+|MemcpyOptimizer|和memcpy、memset相关的优化，消除memcpy或者把一组store转化为memset|lib/Transforms/Scalar/MemCpyOptimizer.cpp |
+|MergedLoadStoreMotion|把多分支共同的store 下沉到共同的后继basic block中|lib/Transforms/Scalar/MergeLoadStoreMotion.cpp|
+|MergeICmps|把多个整数比较转化为memcmp，主要优化cpp的成员、非成员operator==,这样可以有更少的jump，降低分支预测概率和ICacheMiss，并是的code size变小|lib/Transforms/Scalar/MergeICmps.cpp|
+|NaryReassociate|加法表达式重新结合，以消除冗余计算,和Reassociate pass不一样|lib/Transforms/Scalar/NaryReassociate.cpp|
 |NewGVN|||
 |PartiallyInlineLibCalls|||
 |PlaceSafepoints|||
