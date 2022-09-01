@@ -47,9 +47,9 @@ replaceAllUsesWith(Value \*)这个方法可以帮助你快速把使用当前Valu
 
 属性，所属BasicBlock、Debug信息、相对位置Order；可能还有metadata
 
-类型
+## 类型
 Terminator
-UnaryOp
+## UnaryOp
 BinaryOp
 IntDivRem
 Shift
