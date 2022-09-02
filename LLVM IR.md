@@ -1,5 +1,11 @@
 跟着AsmWriter.cpp学习IR
 
+
+# DataLayout
+include/llvm/IR/DataLayout.h
+描述大小端、ELF mangling、ABI对齐、Native integer宽度等信息，被Module持有
+
+
 # Module
 一个编译模块，例如一个cpp文件即对应一个Module，包含多个：
 1.全局符号表GlobalSymbols
@@ -10,6 +16,38 @@
 3.其他
 include/llvm/IR/module.h
 lib/IR/module.cpp
+
+# Attributes
+给Module、Function、Function参数Argument、Instruction等打的属性，用于后续分析优化。
+谁打的Attribute？
+如何使用这些Attribute？
+include/llvm/IR/Attributes.h
+include/llvm/IR/Attributes.td tablegen文件，定义了所有内置Attribute
+
+# Argument
+Function的形参
+include/llvm/IR/Argument.h
+里面有很多判断参数属性的方法，比如是否NonNull、ByVal、ByRef、对齐等等
+
+# Function
+include/llvm/IR/Function.h
+是一个函数块，包含参数和多个BasicBlock
+Argument
+Entry Basic Block
+Basic Block
+
+
+# BasicBlock
+include/llvm/IR/BasicBlock.h
+多个连续无跳转指令的集合，首指令为唯一entry指令，包含如下部分
+label
+[phi Instruction]
+[Instruction]
+Terminator Instruction
+# CFG
+是BasicBlock作为Node的图，Function也是一个CFG；
+llvm中用BasicBlock特化GraphTraits模板，并定义图起始节点、child的begin/end即可实现CFG
+include/llvm/IR/CFG.h
 
 # Type
 llvm使用的是一种强类型IR，Type即定义了各种各样的类型
@@ -142,7 +180,7 @@ isDebugOrPseudoInst
 isOnlyUserOfAnyOperand,判断是否是某个操作数的唯一使用者
 1.
 include/llvm/IR/Instruction.h
-include/llvm/IR/Instruction.def
+include/llvm/IR/Instruction.def 定义了一些宏，用于其他文件重定义宏，生成代码
 lib/IR/Instruction.cpp 
 include/llvm/IR/InstrTypes.h 一些大类指令
 include/llvm/IR/Instructions.h 具体的指令
@@ -150,7 +188,40 @@ lib/IR/Instructions.cpp
 ## nuw nsw
 nuw and nsw stand for “No Unsigned Wrap” and “No Signed Wrap”, respectively. If the nuw and/or nsw keywords are present, the result value of the add is a poison value if unsigned and/or signed overflow, respectively, occurs.
 
-# CFG
+# AbstractCallSite
+一个封装，可以使得直接、间接、callback调用行为一致。
+include/llvm/IR/AbstractCallSite.h
+[youtube](https://www.youtube.com/watch?v=zfiHaPaoQPc)
+[llvm talk](https://llvm.org/devmtg/2018-10/slides/Doerfert-Johannes-Optimizing-Indirections-Slides-LLVM-2018.pdf)
+[thesis](http://compilers.cs.uni-saarland.de/people/doerfert/par_opt_lcpc18.pdf)
+# InstVisitor
+辅助visit类，Visitor模式，解耦数据和操作，继承此类可以定义自己的访问指令行为
+include/llvm/IR/InstVisitor.h
+To define your own visitor, inherit from this class, specifying your
+/// new type for the 'SubClass' template parameter, and "override" visitXXX
+/// functions in your class. I say "override" because this class is defined
+/// in terms of statically resolved overloading, not virtual functions.
+///
+/// For example, here is a visitor that counts the number of malloc
+/// instructions processed:
+///
+///  /// Declare the class.  Note that we derive from InstVisitor instantiated
+///  /// with _our new subclasses_ type.
+///  ///
+///  struct CountAllocaVisitor : public InstVisitor<CountAllocaVisitor> {
+///    unsigned Count;
+///    CountAllocaVisitor() : Count(0) {}
+///
+///    void visitAllocaInst(AllocaInst &AI) { ++Count; }
+///  };
+///
+///  And this class would be used like this:
+///    CountAllocaVisitor CAV;
+///    CAV.visit(function);
+///    NumAllocas = CAV.Count;
+///
+/// The defined has 'visit' methods for Instruction, and also for BasicBlock,
+/// Function, and Module, which recursively process all contained instructions.
 
 
 # AbstractAttribute
