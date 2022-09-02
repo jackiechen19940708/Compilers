@@ -1,10 +1,18 @@
 跟着AsmWriter.cpp学习IR
 
 # Module
+一个编译模块，例如一个cpp文件即对应一个Module，包含多个：
+1.全局符号表GlobalSymbols
+1.1Function声明
+1.2Function定义 
+1.3GlobalVariable
+2.目标信息Target Info
+3.其他
 include/llvm/IR/module.h
 lib/IR/module.cpp
 
 # Type
+llvm使用的是一种强类型IR，Type即定义了各种各样的类型
 include/llvm/IR/type.h
 include/llvm/IR/DerivedTypes.h
 lib/IR/type.cpp
