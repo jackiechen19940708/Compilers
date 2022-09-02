@@ -189,15 +189,16 @@ lib/IR/Instructions.cpp
 nuw and nsw stand for “No Unsigned Wrap” and “No Signed Wrap”, respectively. If the nuw and/or nsw keywords are present, the result value of the add is a poison value if unsigned and/or signed overflow, respectively, occurs.
 
 # Intrinsic
+本征指令，本质上都是函数调用，即CallInst 指令的子类。
+参见 [adding-a-new-intrinsic-function](https://llvm.org/docs/ExtendingLLVM.html#adding-a-new-intrinsic-function) 进行实践，一般来说Adding a new intrinsic function to LLVM is much easier than adding a new instruction. Almost all extensions to LLVM should start as an intrinsic function and then be turned into an instruction if warranted.
 
 
-
-include/llvm/IR/IntrinsicInst.h
-include/llvm/IR/IntrinsicsAArch64.td
+include/llvm/IR/IntrinsicInst.h 
+include/llvm/IR/IntrinsicsAArch64.td 具体的Intrinsic指令
 include/llvm/IR/IntrinsicsAMDGPU.td
 include/llvm/IR/IntrinsicsARM.td
 include/llvm/IR/IntrinsicsBPF.td
-include/llvm/IR/Intrinsics.h
+include/llvm/IR/Intrinsics.h 主要定义Intrinsic指令的枚举和一些Helper函数
 include/llvm/IR/IntrinsicsHexagonDep.td
 include/llvm/IR/IntrinsicsHexagon.td
 include/llvm/IR/IntrinsicsMips.td
