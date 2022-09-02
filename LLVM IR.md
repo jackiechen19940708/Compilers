@@ -188,6 +188,10 @@ lib/IR/Instructions.cpp
 ## nuw nsw
 nuw and nsw stand for “No Unsigned Wrap” and “No Signed Wrap”, respectively. If the nuw and/or nsw keywords are present, the result value of the add is a poison value if unsigned and/or signed overflow, respectively, occurs.
 
+# Intrinsic
+![image](https://user-images.githubusercontent.com/15924287/188087537-8ad01b54-1d9f-4600-98aa-3a9c2d2ff561.png)
+
+
 # AbstractCallSite
 一个封装，可以使得直接、间接、callback调用行为一致。
 include/llvm/IR/AbstractCallSite.h
