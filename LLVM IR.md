@@ -17,6 +17,8 @@ include/llvm/IR/DataLayout.h
 include/llvm/IR/module.h
 lib/IR/module.cpp
 
+
+
 # Attributes
 给Module、Function、Function参数Argument、Instruction等打的属性，用于后续分析优化。
 谁打的Attribute？
@@ -55,7 +57,6 @@ include/llvm/IR/type.h
 include/llvm/IR/DerivedTypes.h
 lib/IR/type.cpp
 
-# Value
 
 # Function
 1. A function consists of a list of basic blocks, a list of arguments and symbol table.
@@ -116,6 +117,9 @@ include/llvm/IR/Value.def def定义了各个Value类型的预处理宏，可以�
 use_begin() and use_end() 这两个方法可以让你遍历使用了此Value的User，即遍历def-use chain
 
 RAUW ： replaceAllUsesWith(Value \*)这个方法可以帮助你快速把使用当前Value的User，替换为使用参数Value
+
+# InlineAsm
+inline asm string
 
 # Instruction
 继承自User，继承自带parent的node，表征LLVM IR指令。
