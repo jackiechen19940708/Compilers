@@ -189,7 +189,30 @@ lib/IR/Instructions.cpp
 nuw and nsw stand for “No Unsigned Wrap” and “No Signed Wrap”, respectively. If the nuw and/or nsw keywords are present, the result value of the add is a poison value if unsigned and/or signed overflow, respectively, occurs.
 
 # Intrinsic
-![image](https://user-images.githubusercontent.com/15924287/188087537-8ad01b54-1d9f-4600-98aa-3a9c2d2ff561.png)
+
+
+
+include/llvm/IR/IntrinsicInst.h
+include/llvm/IR/IntrinsicsAArch64.td
+include/llvm/IR/IntrinsicsAMDGPU.td
+include/llvm/IR/IntrinsicsARM.td
+include/llvm/IR/IntrinsicsBPF.td
+include/llvm/IR/Intrinsics.h
+include/llvm/IR/IntrinsicsHexagonDep.td
+include/llvm/IR/IntrinsicsHexagon.td
+include/llvm/IR/IntrinsicsMips.td
+include/llvm/IR/IntrinsicsNVVM.td
+include/llvm/IR/IntrinsicsPowerPC.td
+include/llvm/IR/IntrinsicsRISCV.td
+include/llvm/IR/IntrinsicsSPIRV.td
+include/llvm/IR/IntrinsicsSystemZ.td
+include/llvm/IR/Intrinsics.td
+include/llvm/IR/IntrinsicsVE.td
+include/llvm/IR/IntrinsicsVEVL.gen.td
+include/llvm/IR/IntrinsicsWebAssembly.td
+include/llvm/IR/IntrinsicsX86.td
+include/llvm/IR/IntrinsicsXCore.td
+
 
 
 # AbstractCallSite
